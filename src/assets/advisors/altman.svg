@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs>
+  <g clip-path="url(#c)">
+    <circle cx="100" cy="100" r="100" fill="#343a42"/>
+    <!-- neck -->
+    <rect x="88" y="118" width="24" height="28" rx="8" fill="#eac3a8"/>
+    <path d="M40 200 C40 152 70 138 100 138 C130 138 160 152 160 200 Z" fill="#3f4a3a"/>
+    <!-- ears -->
+    <ellipse cx="64" cy="96" rx="7" ry="11" fill="#eac3a8"/>
+    <ellipse cx="136" cy="96" rx="7" ry="11" fill="#eac3a8"/>
+    <!-- head -->
+    <ellipse cx="100" cy="92" rx="36" ry="42" fill="#eac3a8"/>
+    <path d="M62 82 Q62 50 100 48 Q138 50 138 82 L134 78 Q132 56 100 54 Q68 56 66 78 Z" fill="#5d4630"/>
+           <path d="M64 80 Q66 56 96 52 Q80 60 76 70 Q70 74 66 84 Z" fill="#5d4630"/>
+           <path d="M136 80 Q134 56 104 52 Q120 60 124 70 Q130 74 134 84 Z" fill="#5d4630"/>
+    <!-- eyes -->
+    <ellipse cx="86" cy="92" rx="4.2" ry="5" fill="#23262b"/>
+    <ellipse cx="114" cy="92" rx="4.2" ry="5" fill="#23262b"/>
+    <!-- brows handled per-person in extras or default -->
+    <path d="M78 81 Q86 77 94 81" stroke="#3c3128" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M106 81 Q114 77 122 81" stroke="#3c3128" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <!-- nose -->
+    <path d="M100 94 Q103 103 99 107" stroke="#c2906c" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- mouth -->
+    <path d="M90 116 Q100 121 110 116" stroke="#9c5f49" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    
+  </g>
+</svg>

@@ -29,6 +29,25 @@ import elonAvatar from "@/assets/mentors/elon.png";
 import steveAvatar from "@/assets/mentors/steve.png";
 import navalAvatar from "@/assets/mentors/naval.png";
 
+// V5 generated flat-illustration avatars
+import josephAvatar from "@/assets/advisors/joseph.svg";
+import solomonAvatar from "@/assets/advisors/solomon.svg";
+import franklAvatar from "@/assets/advisors/frankl.svg";
+import tolleAvatar from "@/assets/advisors/tolle.svg";
+import bryanAvatar from "@/assets/advisors/bryan-johnson.svg";
+import arnoldAvatar from "@/assets/advisors/arnold.svg";
+import attiaAvatar from "@/assets/advisors/attia.svg";
+import buffettAvatar from "@/assets/advisors/buffett.svg";
+import altmanAvatar from "@/assets/advisors/altman.svg";
+import jensenAvatar from "@/assets/advisors/jensen.svg";
+import zuckAvatar from "@/assets/advisors/zuck.svg";
+import pgAvatar from "@/assets/advisors/pg.svg";
+import andreessenAvatar from "@/assets/advisors/andreessen.svg";
+import thielAvatar from "@/assets/advisors/thiel.svg";
+import hoffmanAvatar from "@/assets/advisors/hoffman.svg";
+import hormoziAvatar from "@/assets/advisors/hormozi.svg";
+import garyvAvatar from "@/assets/advisors/garyv.svg";
+
 export type AdvisorCategory =
   | "Spirituality & Purpose"
   | "Mental Health & Emotional Support"
@@ -69,7 +88,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "joseph", name: "Joseph of Egypt", title: "Vision Through Adversity",
-    category: "Spirituality & Purpose", icon: Sun,
+    category: "Spirituality & Purpose", icon: Sun, avatar: josephAvatar,
     bio: "From the pit to the palace. Betrayed, enslaved, imprisoned — and rose to save nations. The mentor for anyone whose dream is being tested.",
     topics: ["Resilience", "Dreams & Vision", "Integrity", "Patience", "Leadership"],
     books: ["Genesis 37–50"],
@@ -78,7 +97,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "solomon", name: "King Solomon", title: "Wisdom & Discernment",
-    category: "Spirituality & Purpose", icon: Crown,
+    category: "Spirituality & Purpose", icon: Crown, avatar: solomonAvatar,
     bio: "The wisest king who ever lived. Asked not for riches or power — but for an understanding heart. Master of decisions, relationships, and wealth.",
     topics: ["Wisdom", "Decision-Making", "Wealth", "Relationships", "Legacy"],
     books: ["Proverbs", "Ecclesiastes", "Song of Songs"],
@@ -134,7 +153,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "frankl", name: "Viktor Frankl", title: "Meaning in Suffering",
-    category: "Mental Health & Emotional Support", icon: Lightbulb,
+    category: "Mental Health & Emotional Support", icon: Lightbulb, avatar: franklAvatar,
     bio: "Survived Auschwitz and emerged with the deepest insight in psychology: those who have a 'why' can bear almost any 'how'. Founder of logotherapy.",
     topics: ["Meaning", "Suffering", "Hope", "Purpose", "Resilience"],
     books: ["Man's Search for Meaning", "The Will to Meaning"],
@@ -152,7 +171,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "tolle", name: "Eckhart Tolle", title: "Presence & the Now",
-    category: "Mental Health & Emotional Support", icon: Sun,
+    category: "Mental Health & Emotional Support", icon: Sun, avatar: tolleAvatar,
     bio: "Spiritual teacher whose awakening at 29 became a map for millions. The mind is a tool — you are the awareness behind it.",
     topics: ["Presence", "Ego", "Anxiety", "Awareness", "Stillness"],
     books: ["The Power of Now", "A New Earth"],
@@ -181,7 +200,7 @@ export const advisors: Advisor[] = [
   // ── HEALTH, LONGEVITY & PERFORMANCE ─────────────────────────────────────────
   {
     id: "bryan-johnson", name: "Bryan Johnson", title: "Longevity Protocol",
-    category: "Health, Longevity & Performance", icon: Activity,
+    category: "Health, Longevity & Performance", icon: Activity, avatar: bryanAvatar,
     bio: "The man spending millions to reverse his biological age — and open-sourcing everything. Sleep, nutrition, and measurement as religion.",
     topics: ["Longevity", "Biomarkers", "Sleep", "Anti-Aging", "Protocols"],
     books: ["Blueprint Protocol", "Don't Die"],
@@ -208,7 +227,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "arnold", name: "Arnold Schwarzenegger", title: "Strength & Reinvention",
-    category: "Health, Longevity & Performance", icon: Dumbbell,
+    category: "Health, Longevity & Performance", icon: Dumbbell, avatar: arnoldAvatar,
     bio: "7x Mr. Olympia, movie legend, governor. The blueprint for reinventing yourself decade after decade — built on iron and vision.",
     topics: ["Bodybuilding", "Vision", "Reinvention", "Work Ethic", "Fitness After 50"],
     books: ["Arnold's Encyclopedia of Bodybuilding", "Be Useful"],
@@ -226,7 +245,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "attia", name: "Peter Attia", title: "Medicine 3.0",
-    category: "Health, Longevity & Performance", icon: Stethoscope,
+    category: "Health, Longevity & Performance", icon: Stethoscope, avatar: attiaAvatar,
     bio: "Physician focused on the science of longevity. Outlive isn't about adding years to life — it's adding life to years. The centenarian decathlon.",
     topics: ["Longevity", "Zone 2", "Metabolic Health", "Strength", "Healthspan"],
     books: ["Outlive"],
@@ -264,7 +283,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "buffett", name: "Warren Buffett", title: "Value & Patience",
-    category: "Entrepreneurship & Business", icon: Landmark,
+    category: "Entrepreneurship & Business", icon: Landmark, avatar: buffettAvatar,
     bio: "The Oracle of Omaha. 70 years of compounding — capital, knowledge, and reputation. The greatest investor who ever lived.",
     topics: ["Investing", "Compounding", "Patience", "Moats", "Integrity"],
     books: ["Berkshire Letters", "The Intelligent Investor (foreword)"],
@@ -282,7 +301,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "altman", name: "Sam Altman", title: "AI & Ambition",
-    category: "Entrepreneurship & Business", icon: Cpu,
+    category: "Entrepreneurship & Business", icon: Cpu, avatar: altmanAvatar,
     bio: "OpenAI CEO, former YC president. Betting humanity's biggest chips on AGI. The playbook for ambition at civilizational scale.",
     topics: ["AI", "Startups", "Scaling", "Ambition", "The Future"],
     books: ["YC Essays", "The Intelligence Age"],
@@ -291,7 +310,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "jensen", name: "Jensen Huang", title: "Compute & Conviction",
-    category: "Entrepreneurship & Business", icon: Cpu,
+    category: "Entrepreneurship & Business", icon: Cpu, avatar: jensenAvatar,
     bio: "NVIDIA founder. 30 years of conviction in accelerated computing before the world caught up. Pain and suffering as a feature, not a bug.",
     topics: ["Deep Tech", "Conviction", "Strategy", "AI Infrastructure"],
     books: ["NVIDIA Keynotes"],
@@ -300,7 +319,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "zuck", name: "Mark Zuckerberg", title: "Scale & Speed",
-    category: "Entrepreneurship & Business", icon: Network,
+    category: "Entrepreneurship & Business", icon: Network, avatar: zuckAvatar,
     bio: "Built the largest social network in history at 19. Move fast, think in decades, bet the company when it matters.",
     topics: ["Product Velocity", "Social", "Long-term Bets", "Talent"],
     books: ["Founder Letters"],
@@ -309,7 +328,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "pg", name: "Paul Graham", title: "Startup Essays",
-    category: "Entrepreneurship & Business", icon: BookOpenText,
+    category: "Entrepreneurship & Business", icon: BookOpenText, avatar: pgAvatar,
     bio: "YC co-founder whose essays are the startup canon. Make something people want — everything else is noise.",
     topics: ["Startups", "Writing", "Ideas", "Determination"],
     books: ["Hackers & Painters", "PaulGraham.com Essays"],
@@ -318,7 +337,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "andreessen", name: "Marc Andreessen", title: "Software Eats the World",
-    category: "Entrepreneurship & Business", icon: TrendingUp,
+    category: "Entrepreneurship & Business", icon: TrendingUp, avatar: andreessenAvatar,
     bio: "Netscape founder, a16z co-founder. The techno-optimist case for building — software, AI, and American dynamism.",
     topics: ["Venture Capital", "Tech Trends", "Optimism", "Building"],
     books: ["The Techno-Optimist Manifesto"],
@@ -327,7 +346,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "thiel", name: "Peter Thiel", title: "Zero to One",
-    category: "Entrepreneurship & Business", icon: Lightbulb,
+    category: "Entrepreneurship & Business", icon: Lightbulb, avatar: thielAvatar,
     bio: "PayPal co-founder, first Facebook investor. Competition is for losers — build a monopoly on something the world doesn't yet understand.",
     topics: ["Monopoly", "Secrets", "Contrarian Thinking", "Definite Optimism"],
     books: ["Zero to One"],
@@ -336,7 +355,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "hoffman", name: "Reid Hoffman", title: "Blitzscaling & Networks",
-    category: "Entrepreneurship & Business", icon: Network,
+    category: "Entrepreneurship & Business", icon: Network, avatar: hoffmanAvatar,
     bio: "LinkedIn founder, master of network effects and intelligent risk. Your network is your net worth — scale fast when it counts.",
     topics: ["Networks", "Blitzscaling", "Career Strategy", "AI"],
     books: ["Blitzscaling", "The Startup of You"],
@@ -345,7 +364,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "hormozi", name: "Alex Hormozi", title: "Offers & Acquisition",
-    category: "Entrepreneurship & Business", icon: Megaphone,
+    category: "Entrepreneurship & Business", icon: Megaphone, avatar: hormoziAvatar,
     bio: "From sleeping on a gym floor to $100M+ portfolio. Makes business brutally simple: make an offer so good people feel stupid saying no.",
     topics: ["Offers", "Sales", "Customer Acquisition", "Scaling"],
     books: ["$100M Offers", "$100M Leads"],
@@ -354,7 +373,7 @@ export const advisors: Advisor[] = [
   },
   {
     id: "garyv", name: "Gary Vaynerchuk", title: "Attention & Hustle",
-    category: "Entrepreneurship & Business", icon: Megaphone,
+    category: "Entrepreneurship & Business", icon: Megaphone, avatar: garyvAvatar,
     bio: "Built two $100M+ businesses on attention arbitrage. Day trading attention since before it was a thing. Kindness + candor.",
     topics: ["Social Media", "Branding", "Patience", "Self-Awareness"],
     books: ["Crush It!", "Day Trading Attention"],

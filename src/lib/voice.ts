@@ -213,7 +213,62 @@ _utteranceRef.current = utterance;
   synth.speak(utterance);
 }
 
+// ─── Fish Audio TTS (primary — celebrity voice clones) ───────────────────────
+// Per-advisor Fish Audio reference IDs. Your partner fills these in from
+// fish.audio → Voices → copy the model/reference ID. Empty = default voice.
+
+export const FISH_VOICES: Record<string, string> = {
+  christ: "", joseph: "", solomon: "", marcus: "", epictetus: "", seneca: "",
+  "spiritual-mentor": "", jung: "", frankl: "", brene: "", tolle: "",
+  "huberman-mind": "", "emotional-mentor": "", "bryan-johnson": "", goggins: "",
+  huberman: "", arnold: "", tony: "", attia: "", "health-mentor": "",
+  elon: "", jobs: "", buffett: "", naval: "", altman: "", jensen: "",
+  zuck: "", pg: "", andreessen: "", thiel: "", hoffman: "", hormozi: "",
+  garyv: "", "business-mentor": "", "chief-advisor": "",
+};
+
+// Session cache: once /api/tts returns 503 (no key configured) we stop trying.
+let fishAvailable: boolean | null = null;
+
+export function isFishAudioKnownUnavailable(): boolean {
+  return fishAvailable === false;
+}
+
+async function speakFishAudio(
+  text: string,
+  referenceId: string,
+  onStart: () => void,
+  onEnd: () => void,
+): Promise<boolean> {
+  // Returns true if Fish Audio handled playback; false → caller falls back.
+  try {
+    const clean = text.replace(/\*\*/g, "").slice(0, 800);
+    const res = await fetch("/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: clean, referenceId }),
+    });
+
+    if (res.status === 503) { fishAvailable = false; return false; }
+    if (!res.ok) return false;
+    fishAvailable = true;
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    currentAudio = audio;
+    audio.onended = () => { URL.revokeObjectURL(url); currentAudio = null; onEnd(); };
+    audio.onerror = () => { URL.revokeObjectURL(url); currentAudio = null; onEnd(); };
+    onStart();
+    await audio.play();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // ─── Main speak function ──────────────────────────────────────────────────────
+// Priority: Fish Audio (celebrity clones, server key) → ElevenLabs → browser.
 
 export function speak(
   text: string,
@@ -222,17 +277,19 @@ export function speak(
 ): void {
   const voice = getMentorVoice(mentorId);
 
-  if (hasElevenLabsKey()) {
-    speakElevenLabs(
-      text,
-      voice.elevenLabsId,
-      callbacks.onStart,
-      callbacks.onEnd,
-      callbacks.onError ?? console.error,
-    );
-  } else {
-    speakBrowser(text, voice.browserVoiceHint, callbacks.onStart, callbacks.onEnd);
-  }
+  const fallback = () => {
+    if (hasElevenLabsKey()) {
+      speakElevenLabs(text, voice.elevenLabsId, callbacks.onStart, callbacks.onEnd, callbacks.onError ?? console.error);
+    } else {
+      speakBrowser(text, voice.browserVoiceHint, callbacks.onStart, callbacks.onEnd);
+    }
+  };
+
+  if (fishAvailable === false) { fallback(); return; }
+
+  stopAllVoice();
+  speakFishAudio(text, FISH_VOICES[mentorId] ?? "", callbacks.onStart, callbacks.onEnd)
+    .then((handled) => { if (!handled) fallback(); });
 }
 
 // ─── Speech Recognition (STT) ────────────────────────────────────────────────
