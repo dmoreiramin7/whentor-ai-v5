@@ -5,6 +5,7 @@ import { getAdvisor } from "@/lib/advisors";
 import { detectEmotion, EMOTION_META } from "@/lib/emotions";
 import { getPersonality } from "@/lib/personalities";
 import { getMentorHistory } from "@/lib/memory";
+import { getReply, buildMemorySummary, type ChatTurn } from "@/lib/chat";
 import { useMemory } from "@/hooks/useMemory";
 import { useVoice } from "@/hooks/useVoice";
 import {
@@ -79,7 +80,7 @@ export function AdvisorDetailPage() {
 
   const Icon = advisor.icon;
 
-  function sendMessage(text?: string) {
+  async function sendMessage(text?: string) {
     if (!advisor || !personality) return;
     const userMsg = (text ?? input).trim();
     if (!userMsg) return;
@@ -89,27 +90,39 @@ export function AdvisorDetailPage() {
     setMessages((prev) => [...prev, { role: "user", text: userMsg, emotion, timestamp: Date.now() }]);
     setIsTyping(true);
 
-    const memCtx = pastHistory.map((h) => `User said: "${h.userMessage}"`);
     const _advisor = advisor;
-    const _personality = personality;
 
-    setTimeout(() => {
-      setIsTyping(false);
-      const emotionalPre = emotion.intensity >= 2
-        ? _personality.emotionalResponses[emotion.emotion] ?? ""
-        : "";
-      const mainResponse = _personality.respond(userMsg, emotion, memCtx);
-      const fullReply = emotionalPre ? `${emotionalPre}\n\n${mainResponse}` : mainResponse;
+    // Build conversation history for the AI (exclude the greeting if it's the only prior msg)
+    const history: ChatTurn[] = messages
+      .filter((m) => m.text.trim().length > 0)
+      .map((m) => ({ role: m.role === "user" ? "user" : "assistant", content: m.text } as ChatTurn));
 
-      setMessages((prev) => [...prev, { role: "advisor", text: fullReply, timestamp: Date.now() }]);
-      recordEmotion(emotion.emotion, emotion.intensity, userMsg.slice(0, 60), _advisor.id);
-      recordConversation(_advisor.id, userMsg, fullReply, emotion.emotion);
+    const memorySummary = buildMemorySummary({
+      streak: memory.currentStreak,
+      totalSessions: memory.totalSessions,
+      topAreas: memory.topAreas,
+      dominantEmotion: memory.dominantEmotion,
+      lastTopics: pastHistory.map((h) => h.userMessage),
+    });
 
-      const milestoneWords = ["breakthrough", "realized", "changed", "finally", "i see now", "thank you", "helped me", "makes sense now"];
-      if (milestoneWords.some((w) => userMsg.toLowerCase().includes(w))) {
-        recordMilestone(_advisor.id, "personal_growth", userMsg, `Insight with ${_advisor.name}`);
-      }
-    }, 800 + Math.random() * 600);
+    const fullReply = await getReply({
+      advisorId: _advisor.id,
+      userMessage: userMsg,
+      emotion,
+      history,
+      userName: memory.name.split(" ")[0],
+      memorySummary,
+    });
+
+    setIsTyping(false);
+    setMessages((prev) => [...prev, { role: "advisor", text: fullReply, timestamp: Date.now() }]);
+    recordEmotion(emotion.emotion, emotion.intensity, userMsg.slice(0, 60), _advisor.id);
+    recordConversation(_advisor.id, userMsg, fullReply, emotion.emotion);
+
+    const milestoneWords = ["breakthrough", "realized", "changed", "finally", "i see now", "thank you", "helped me", "makes sense now"];
+    if (milestoneWords.some((w) => userMsg.toLowerCase().includes(w))) {
+      recordMilestone(_advisor.id, "personal_growth", userMsg, `Insight with ${_advisor.name}`);
+    }
   }
 
   const quickPrompts = advisor.topics.slice(0, 4).map((t) => `Guide me on ${t.toLowerCase()}`);

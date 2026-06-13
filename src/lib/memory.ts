@@ -56,6 +56,7 @@ export type Milestone = {
 
 export type UserMemory = {
   name: string;
+  onboarded: boolean;
   firstSeen: number;
   lastSeen: number;
   totalSessions: number;
@@ -88,7 +89,8 @@ export type UserMemory = {
 const KEY = "whentor_user_memory";
 
 const DEFAULT_MEMORY: UserMemory = {
-  name: "Diogo M.",
+  name: "friend",
+  onboarded: false,
   firstSeen: Date.now(),
   lastSeen: Date.now(),
   totalSessions: 1,

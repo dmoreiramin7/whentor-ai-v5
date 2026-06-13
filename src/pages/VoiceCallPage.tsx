@@ -4,6 +4,7 @@ import { getAdvisor } from "@/lib/advisors";
 import { Sparkles } from "lucide-react";
 import { getPersonality } from "@/lib/personalities";
 import { detectEmotion } from "@/lib/emotions";
+import { getReply, buildMemorySummary, type ChatTurn } from "@/lib/chat";
 import { getMentorVoice, hasElevenLabsKey, isSpeechRecognitionSupported } from "@/lib/voice";
 import { useVoice } from "@/hooks/useVoice";
 import { useMemory } from "@/hooks/useMemory";
@@ -36,6 +37,7 @@ export function VoiceCallPage() {
   const [callStarted, setCallStarted] = useState(false);
   const transcriptRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const historyRef = useRef<ChatTurn[]>([]); // running transcript for the AI
   const voiceConfig = id ? getMentorVoice(id) : null;
 
   // ── Timer ────────────────────────────────────────────────────────────────────
@@ -60,6 +62,7 @@ export function VoiceCallPage() {
     const msgId = `mentor-0`;
 
     setMessages([{ role: "mentor", text: greeting, ts: Date.now() }]);
+    historyRef.current = [{ role: "assistant", content: greeting }];
     setCallStarted(true);
 
     voice.speakThenListen(cleanGreeting, msgId, handleUserSpoke);
@@ -67,22 +70,35 @@ export function VoiceCallPage() {
   }, []);
 
   // ── Handle user speech ────────────────────────────────────────────────────────
-  function handleUserSpoke(userText: string) {
+  async function handleUserSpoke(userText: string) {
     if (!userText.trim() || !mentor || !personality) return;
 
     const emotion = detectEmotion(userText);
     setMessages((prev) => [...prev, { role: "user", text: userText, ts: Date.now() }]);
     recordEmotion(emotion.emotion, emotion.intensity, userText.slice(0, 60), mentor.id);
 
-    // Build reply
-    const emotionalPre = emotion.intensity >= 2
-      ? personality.emotionalResponses[emotion.emotion] ?? ""
-      : "";
-    const mainResp = personality.respond(userText, emotion, []);
-    const fullReply = emotionalPre ? `${emotionalPre} ${mainResp}` : mainResp;
+    const priorHistory = historyRef.current.slice();
+    historyRef.current = [...priorHistory, { role: "user", content: userText }];
+
+    const fullReply = await getReply({
+      advisorId: mentor.id,
+      userMessage: userText,
+      emotion,
+      history: priorHistory,
+      userName: memory.name.split(" ")[0],
+      memorySummary: buildMemorySummary({
+        streak: memory.currentStreak,
+        totalSessions: memory.totalSessions,
+        topAreas: memory.topAreas,
+        dominantEmotion: memory.dominantEmotion,
+        lastTopics: [],
+      }),
+    });
+
     const cleanReply = renderClean(fullReply);
     const msgId = `mentor-${Date.now()}`;
 
+    historyRef.current = [...historyRef.current, { role: "assistant", content: fullReply }];
     setMessages((prev) => [...prev, { role: "mentor", text: fullReply, ts: Date.now() }]);
     recordConversation(mentor.id, userText, fullReply, emotion.emotion);
 

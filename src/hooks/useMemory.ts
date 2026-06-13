@@ -63,9 +63,14 @@ export function useMemory() {
     }));
   }, []);
 
+  const setName = useCallback((name: string) => {
+    setMemory((prev) => ({ ...prev, name: name.trim() || prev.name, onboarded: true }));
+  }, []);
+
   return {
     memory,
     setMood,
+    setName,
     recordEmotion,
     recordConversation,
     recordMilestone,

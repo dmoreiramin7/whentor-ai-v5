@@ -5,6 +5,7 @@ import { advisors, ALL_CATEGORIES, CATEGORY_META } from "@/lib/advisors";
 import { MOOD_OPTIONS, EMOTION_META } from "@/lib/emotions";
 import { useMemory } from "@/hooks/useMemory";
 import { useVoice } from "@/hooks/useVoice";
+import { OnboardingScreen } from "./OnboardingScreen";
 import {
   Mic, ArrowRight, Sparkles, Volume2, Loader2, Square,
   Search, Brain, Heart, Activity, Briefcase, Crown,
@@ -35,13 +36,9 @@ const MOOD_ADVISORS: Record<string, string[]> = {
 };
 
 export function HomePage() {
-  const { memory, setMood } = useMemory();
+  const { memory, setMood, setName } = useMemory();
   const voice = useVoice("chief-advisor");
   const [activePill, setActivePill] = useState<string | null>(null);
-
-  const hour = new Date().getHours();
-  const greeting = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
-  const firstName = memory.name.split(" ")[0];
 
   // Mood check-in: shown until set today
   const today = new Date().toISOString().slice(0, 10);
@@ -50,6 +47,15 @@ export function HomePage() {
     : false;
   const todayMood = moodIsToday ? memory.todayMood : null;
   const [entering, setEntering] = useState(!todayMood);
+
+  // First launch: capture the user's name before anything else.
+  if (!memory.onboarded) {
+    return <OnboardingScreen onComplete={(name) => setName(name)} />;
+  }
+
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
+  const firstName = memory.name.split(" ")[0];
 
   const reflection = memory.totalSessions > 1
     ? `${memory.currentStreak} days strong, ${firstName}. One deep conversation today — that's the move.`
