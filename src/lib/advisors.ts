@@ -236,9 +236,9 @@ export const advisors: Advisor[] = [
     followers: "190M",
   },
   {
-    id: "relationship-therapist", name: "Esther Perel", title: "Love & Relationships",
+    id: "relationship-therapist", name: "Relationship Therapist", title: "Love & Relationships",
     category: "Mental Health & Emotional Support", icon: Heart, avatar: estherAvatar,
-    bio: "The world's most insightful relationship therapist. Desire, intimacy, infidelity, communication — she holds complexity where others give clichés.",
+    bio: "A specialist in love and connection. Desire, intimacy, communication, conflict — holding complexity where others give clichés.",
     topics: ["Intimacy", "Communication", "Conflict", "Desire", "Repair"],
     books: ["Mating in Captivity", "The State of Affairs"],
     essence: "The quality of your relationships determines the quality of your life.",
