@@ -20,15 +20,15 @@ const pills: Pill[] = [
   { id: "lead",      label: "Lead",      icon: Crown,     advisorId: "solomon" },
 ];
 
-const essentialIds = ["christ", "jung", "emotional-mentor", "elon", "health-mentor", "business-mentor"];
+const essentialIds = ["christ", "jung", "therapist", "elon", "health-mentor", "trump"];
 
 // Mood → recommended advisors (tap = instant guidance)
 const MOOD_ADVISORS: Record<string, string[]> = {
   motivated:  ["goggins", "elon", "hormozi", "tony"],
   happy:      ["naval", "tolle", "solomon", "buffett"],
   neutral:    essentialIds,
-  anxious:    ["emotional-mentor", "christ", "huberman-mind", "tolle"],
-  sad:        ["christ", "emotional-mentor", "frankl", "brene"],
+  anxious:    ["therapist", "christ", "huberman-mind", "tolle"],
+  sad:        ["therapist", "christ", "frankl", "brene"],
   lost:       ["christ", "frankl", "marcus", "solomon"],
   frustrated: ["goggins", "marcus", "jung", "epictetus"],
   grateful:   ["christ", "tolle", "spiritual-mentor", "brene"],

@@ -85,6 +85,8 @@ export const MENTOR_VOICES: Record<string, { elevenLabsId: string; displayName: 
   "business-mentor": { elevenLabsId: "nPczCjzI2devNBz1zQrb", displayName: "Brian",   browserVoiceHint: "Tom"     },
   "chief-advisor":   { elevenLabsId: "N2lVS1w4EtoT3dr4eOWO", displayName: "Callum",  browserVoiceHint: "Alex"    },
   trump:             { elevenLabsId: "pNInz6obpgDQGcFmaJgB", displayName: "Adam",    browserVoiceHint: "Fred"    },
+  psychiatrist:      { elevenLabsId: "GBv7mTt0atIp3Br8iCZE", displayName: "Thomas",  browserVoiceHint: "Daniel"  },
+  "relationship-therapist": { elevenLabsId: "XrExE9yKIg1WjnnlVkGX", displayName: "Matilda", browserVoiceHint: "Samantha" },
 };
 
 const DEFAULT_VOICE = { elevenLabsId: "TX3LPaxmHKxFdv7VOQHJ", displayName: "Liam", browserVoiceHint: "Aaron" };
@@ -234,6 +236,7 @@ export const FISH_VOICES: Record<string, string> = {
   elon: "", jobs: "", buffett: "", naval: "", altman: "", jensen: "",
   zuck: "", pg: "", andreessen: "", thiel: "", hoffman: "", hormozi: "",
   garyv: "", "business-mentor": "", "chief-advisor": "", trump: "",
+  therapist: "", psychologist: "", psychiatrist: "", psychoanalyst: "", "relationship-therapist": "",
 };
 
 // Session cache: once /api/tts returns 503 (no key configured) we stop trying.

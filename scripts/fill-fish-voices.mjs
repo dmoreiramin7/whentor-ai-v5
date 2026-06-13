@@ -56,6 +56,11 @@ const SEARCH = {
   "health-mentor": "energetic coach male",
   "business-mentor": "confident business male voice",
   "chief-advisor": "wise advisor calm male",
+  therapist: "calm therapist warm voice",
+  psychologist: "psychologist calm male voice",
+  psychiatrist: "doctor calm professional male",
+  psychoanalyst: "Sigmund Freud",
+  "relationship-therapist": "Esther Perel",
 };
 
 async function searchVoice(term) {

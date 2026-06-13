@@ -29,6 +29,8 @@ import elonAvatar from "@/assets/mentors/elon.png";
 import steveAvatar from "@/assets/mentors/steve.png";
 import navalAvatar from "@/assets/mentors/naval.png";
 import trumpAvatar from "@/assets/mentors/trump.png";
+import freudAvatar from "@/assets/mentors/freud.png";
+import estherAvatar from "@/assets/mentors/esther.png";
 
 // V5 generated flat-illustration avatars
 import josephAvatar from "@/assets/advisors/joseph.svg";
@@ -196,6 +198,51 @@ export const advisors: Advisor[] = [
     books: ["Modern Clinical Practice"],
     essence: "What you're feeling is valid. Let's hold it together.",
     followers: "30M",
+  },
+  {
+    id: "therapist", name: "Therapist", title: "Healing & Emotional Processing",
+    category: "Mental Health & Emotional Support", icon: Heart,
+    bio: "A modern, evidence-based therapist. CBT, validation, and a space where you can name what's stuck and move through it — at your pace.",
+    topics: ["Anxiety", "Trauma", "Grief", "Self-Esteem", "Relationships"],
+    books: ["CBT", "ACT", "Modern Clinical Practice"],
+    essence: "You don't have to perform strength here. Just be honest.",
+    followers: "40M",
+  },
+  {
+    id: "psychologist", name: "Clinical Psychologist", title: "Mind, Behavior & Patterns",
+    category: "Mental Health & Emotional Support", icon: Brain,
+    bio: "Understands how thoughts, behaviors, and history shape who you are. Helps you see your patterns — and rewrite the ones holding you back.",
+    topics: ["Behavior Patterns", "Cognitive Distortions", "Habits", "Stress", "Identity"],
+    books: ["Evidence-Based Psychology"],
+    essence: "Your patterns are not your personality. They can change.",
+    followers: "35M",
+  },
+  {
+    id: "psychiatrist", name: "Psychiatrist", title: "Mental Health & Medicine",
+    category: "Mental Health & Emotional Support", icon: Stethoscope,
+    bio: "Medical perspective on mental health. Understands the biology of depression, anxiety, ADHD, and sleep — and when professional care matters. Always encourages seeking real-world help when needed.",
+    topics: ["Depression", "Anxiety Disorders", "ADHD", "Sleep", "When to Seek Help"],
+    books: ["Psychiatric Medicine", "Neuroscience"],
+    essence: "Mental health is health. Treat it with the same seriousness.",
+    followers: "25M",
+  },
+  {
+    id: "psychoanalyst", name: "Sigmund Freud", title: "The Unconscious Mind",
+    category: "Mental Health & Emotional Support", icon: BookOpenText, avatar: freudAvatar,
+    bio: "The father of psychoanalysis. Dreams, defense mechanisms, and the hidden forces beneath your choices — nothing you do is accidental.",
+    topics: ["The Unconscious", "Dreams", "Defense Mechanisms", "Childhood", "Desire"],
+    books: ["The Interpretation of Dreams", "Civilization and Its Discontents"],
+    essence: "Unexpressed emotions will never die. They surface later in uglier ways.",
+    followers: "190M",
+  },
+  {
+    id: "relationship-therapist", name: "Esther Perel", title: "Love & Relationships",
+    category: "Mental Health & Emotional Support", icon: Heart, avatar: estherAvatar,
+    bio: "The world's most insightful relationship therapist. Desire, intimacy, infidelity, communication — she holds complexity where others give clichés.",
+    topics: ["Intimacy", "Communication", "Conflict", "Desire", "Repair"],
+    books: ["Mating in Captivity", "The State of Affairs"],
+    essence: "The quality of your relationships determines the quality of your life.",
+    followers: "28M",
   },
 
   // ── HEALTH, LONGEVITY & PERFORMANCE ─────────────────────────────────────────
