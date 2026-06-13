@@ -345,6 +345,7 @@ const PERSONALITY_ALIASES: Record<string, string> = {
   garyv: "goggins",
   "business-mentor": "visionary",
   "chief-advisor": "therapist",
+  trump: "visionary",
 };
 
 export function getPersonality(mentorId: string): MentorPersonality {

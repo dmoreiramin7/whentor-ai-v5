@@ -28,6 +28,7 @@ import tonyAvatar from "@/assets/mentors/tony.png";
 import elonAvatar from "@/assets/mentors/elon.png";
 import steveAvatar from "@/assets/mentors/steve.png";
 import navalAvatar from "@/assets/mentors/naval.png";
+import trumpAvatar from "@/assets/mentors/trump.png";
 
 // V5 generated flat-illustration avatars
 import josephAvatar from "@/assets/advisors/joseph.svg";
@@ -263,6 +264,15 @@ export const advisors: Advisor[] = [
   },
 
   // ── ENTREPRENEURSHIP & BUSINESS ─────────────────────────────────────────────
+  {
+    id: "trump", name: "Donald Trump", title: "Deals & Leadership",
+    category: "Entrepreneurship & Business", icon: Crown, avatar: trumpAvatar,
+    bio: "45th and 47th President of the United States. Real estate empire, The Art of the Deal, and a masterclass in negotiation, branding, and commanding any room.",
+    topics: ["Negotiation", "Branding", "Leadership", "Real Estate", "Winning"],
+    books: ["The Art of the Deal", "Think Big"],
+    essence: "Think big. You're going to be thinking anyway, so think big.",
+    followers: "150M",
+  },
   {
     id: "elon", name: "Elon Musk", title: "First Principles",
     category: "Entrepreneurship & Business", icon: Rocket, avatar: elonAvatar,

@@ -84,6 +84,7 @@ export const MENTOR_VOICES: Record<string, { elevenLabsId: string; displayName: 
   garyv:             { elevenLabsId: "TxGEqnHWrfWFTfGW9XjX", displayName: "Josh",    browserVoiceHint: "Fred"    },
   "business-mentor": { elevenLabsId: "nPczCjzI2devNBz1zQrb", displayName: "Brian",   browserVoiceHint: "Tom"     },
   "chief-advisor":   { elevenLabsId: "N2lVS1w4EtoT3dr4eOWO", displayName: "Callum",  browserVoiceHint: "Alex"    },
+  trump:             { elevenLabsId: "pNInz6obpgDQGcFmaJgB", displayName: "Adam",    browserVoiceHint: "Fred"    },
 };
 
 const DEFAULT_VOICE = { elevenLabsId: "TX3LPaxmHKxFdv7VOQHJ", displayName: "Liam", browserVoiceHint: "Aaron" };
@@ -193,14 +194,22 @@ function speakBrowser(
   const utterance = new SpeechSynthesisUtterance(clean);
 _utteranceRef.current = utterance;
 
-  // Try to find a matching voice
+  // Voice selection — explicit male voice priority, never match "female"
   const voices = synth.getVoices();
-  const preferred = voices.find(
-    (v) =>
-      v.name.toLowerCase().includes(browserVoiceHint.toLowerCase()) ||
-      v.name.toLowerCase().includes("male") ||
-      v.lang.startsWith("en"),
-  );
+  const lower = (s: string) => s.toLowerCase();
+  const isFemale = (v: SpeechSynthesisVoice) =>
+    /female|samantha|victoria|karen|moira|tessa|fiona|kate|susan|allison|ava|zoe|nicky|serena/.test(lower(v.name));
+  const MALE_NAMES = ["daniel", "aaron", "fred", "alex", "arthur", "tom", "oliver", "gordon", "reed", "rocko", "eddy", "ralph", "jacques", "bruce", "lee", "james", "rishi"];
+
+  const preferred =
+    // 1. Exact hint match (e.g. "Daniel")
+    voices.find((v) => lower(v.name).includes(lower(browserVoiceHint)) && v.lang.startsWith("en")) ??
+    // 2. Any known male en voice
+    voices.find((v) => MALE_NAMES.some((n) => lower(v.name).includes(n)) && v.lang.startsWith("en")) ??
+    // 3. Any en-US voice that is not female
+    voices.find((v) => v.lang.startsWith("en-US") && !isFemale(v)) ??
+    // 4. Any en voice that is not female
+    voices.find((v) => v.lang.startsWith("en") && !isFemale(v));
   if (preferred) utterance.voice = preferred;
 
   utterance.rate = 0.95;
@@ -224,7 +233,7 @@ export const FISH_VOICES: Record<string, string> = {
   huberman: "", arnold: "", tony: "", attia: "", "health-mentor": "",
   elon: "", jobs: "", buffett: "", naval: "", altman: "", jensen: "",
   zuck: "", pg: "", andreessen: "", thiel: "", hoffman: "", hormozi: "",
-  garyv: "", "business-mentor": "", "chief-advisor": "",
+  garyv: "", "business-mentor": "", "chief-advisor": "", trump: "",
 };
 
 // Session cache: once /api/tts returns 503 (no key configured) we stop trying.
